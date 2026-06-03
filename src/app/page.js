@@ -6,7 +6,7 @@ export default function Home() {
     <div className="">
     <h2>Welcome to the Home Page</h2>
     <div>
-      <Banner></Banner>
+    <Banner></Banner>
     </div>
     </div>
   );
