@@ -86,7 +86,7 @@ export default function Banner() {
 
                 <Link
                   href="/tutors"
-                  className="inline-block bg-[#2bb49a] hover:bg-[#22917c] px-8 py-3 rounded-md font-medium transition-colors duration-300"
+                  className="inline-block  bg-linear-to-r  from-[#4f39f6] to-[#9514fa] hover:bg-[#9514fa] px-8 py-3 rounded-md font-medium transition-colors duration-300"
                 > Find a Tutor
                 </Link>
               </div>
@@ -146,8 +146,8 @@ export default function Banner() {
               aria-label={`Go to Slide ${index + 1}`}
               className={`h-3 w-3 rounded-full transition-all ${
                 currentSlide === index
-                  ? "bg-[#2bb49a] w-8"
-                  : "bg-white/50"
+                  ? " bg-linear-to-r  from-[#4f39f6] to-[#9514fa] w-8"
+                  : "bg-purple-500/70"
               }`}
             />
           ))}

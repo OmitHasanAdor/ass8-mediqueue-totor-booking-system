@@ -5,13 +5,14 @@ import Link from "next/link";
 
 
 const Navbar = () => {
+    
 
     const { data, error, isPending } = authClient.useSession();
     const user = data?.user;
    if (isPending) {
         console.log("Session is loading...");
     } else {
-        console.log("Actual Session Data:", data); // ✅ এখানে 'session' বদলে 'data' করে দেওয়া হয়েছে
+        console.log("Actual Session Data:", data);
         console.log("User Data nav:", user);
     }
 
@@ -60,12 +61,12 @@ const Navbar = () => {
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li>
-                            <Link href={"/profile"} className="justify-between">
+                            <Link href={"/profile"} className=" font-semibold">
                                 Profile
-                                <span className="badge">New</span>
+                               
                             </Link>
                         </li>
-                        <li onClick={() => authClient.signOut()}>Logout</li>
+                        <li onClick={() => authClient.signOut()} className=" cursor-pointer">Logout</li>
                     </ul>
                 </div>:
                 <div className="">
