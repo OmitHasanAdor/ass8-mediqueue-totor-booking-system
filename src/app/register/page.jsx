@@ -3,11 +3,12 @@ import { authClient } from "@/lib/auth-client";
 import {Check} from "@gravity-ui/icons";
 import {Button, Description, FieldError, Form, Input, Label, TextField} from "@heroui/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 
 
 const RegisterPage = () => {
+   const router = useRouter();
 
       const onSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ if (error) {
   alert(error.message);
 } else {
     alert("Signup successful! Please check your email to verify your account.");
-    redirect("/");
+     router.push("/");
 }
 
   };

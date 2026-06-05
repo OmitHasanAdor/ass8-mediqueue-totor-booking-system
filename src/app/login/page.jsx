@@ -2,12 +2,13 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 
 
 const LoginPage = () => {
+     const router = useRouter();
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -22,7 +23,7 @@ const LoginPage = () => {
             alert(error.message);
         } else {
             alert("Login successful! Redirecting to your dashboard...");
-           redirect("/");
+            router.push("/");
         }
     };
 
