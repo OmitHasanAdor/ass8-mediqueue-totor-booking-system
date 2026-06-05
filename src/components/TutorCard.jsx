@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   FaMapMarkerAlt,
   FaCalendarAlt,
@@ -42,23 +43,23 @@ const TutorCard = ({ tutor }) => {
         {/* Tutor Header Info */}
         <div className="mb-4">
           <h2 className="text-2xl font-bold text-gray-900">{tutorName}</h2>
-          <div className="flex items-center gap-2 mt-1 text-gray-500">
-            <FaUniversity className="text-purple-600 shrink-0" />
+          <div className="flex items-center gap-2 mt-1 text-gray-800">
+            <FaUniversity className="text-gray-400 shrink-0" />
             <span className="text-sm font-medium">{Institution}</span>
           </div>
         </div>
 
         {/* Tutor Detailed Specs */}
         <div className="space-y-3 my-5 border-t border-b border-gray-50 py-4 text-sm text-gray-600">
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <FaMapMarkerAlt className="text-gray-400 w-4" />
             <p><span className="font-semibold text-gray-800">Location:</span> {location}</p>
-          </div>
+          </div> */}
 
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <FaBriefcase className="text-gray-400 w-4" />
             <p><span className="font-semibold text-gray-800">Experience:</span> {experience}</p>
-          </div>
+          </div> */}
 
           <div className="flex items-center gap-3">
             <FaClock className="text-gray-400 w-4" />
@@ -70,10 +71,10 @@ const TutorCard = ({ tutor }) => {
             <p><span className="font-semibold text-gray-800">Session Start Date:</span> {sessionStartDate}</p>
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <FaUserFriends className="text-gray-400 w-4" />
             <p><span className="font-semibold text-gray-800">Total Slots Available:</span> {totalSlot}</p>
-          </div>
+          </div> */}
         </div>
 
         {/* Pricing & Booking Action */}
@@ -84,12 +85,14 @@ const TutorCard = ({ tutor }) => {
             <span className="text-gray-500 text-sm">/hr</span>
           </div>
 
+            <Link href={`/tutors/${_id}`}>
           <button
 
             className="w-full  bg-linear-to-r  from-[#4f39f6] to-[#9514fa] hover:bg-[#9514fa] text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 active:scale-[0.98] shadow-md shadow-teal-600/10"
           >
             Book Session
           </button>
+          </Link>
         </div>
       </div>
 
