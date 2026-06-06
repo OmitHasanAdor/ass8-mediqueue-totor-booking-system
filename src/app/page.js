@@ -1,16 +1,14 @@
 import AvailableTutors from "@/components/AvailableTutors";
 import Banner from "@/components/Banner";
+import FeatureSection from "@/components/FeatureSection";
 
 
 export default function Home() {
   return (
     <div className="">
-    <div>
     <Banner></Banner>
-    </div>
-    <div className="">
       <AvailableTutors></AvailableTutors>
-    </div>
+  <FeatureSection></FeatureSection>
     </div>
   );
 }

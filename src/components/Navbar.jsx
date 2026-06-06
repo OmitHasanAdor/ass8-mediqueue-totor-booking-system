@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 
 const Navbar = () => {
@@ -9,12 +10,14 @@ const Navbar = () => {
 
     const { data, error, isPending } = authClient.useSession();
     const user = data?.user;
-   if (isPending) {
-        console.log("Session is loading...");
-    } else {
-        console.log("Actual Session Data:", data);
-        console.log("User Data nav:", user);
-    }
+  useEffect(() => {
+        if (isPending) {
+            console.log("Session is loading...");
+        } else {
+            console.log("Actual Session Data:", data);
+            console.log("User Data nav:", user);
+        }
+    }, [data, isPending, user]);
 
     return (
         <div className="navbar bg-base-100 shadow-sm sm:px-8 px-0 py-2 sticky top-0 z-10 ">

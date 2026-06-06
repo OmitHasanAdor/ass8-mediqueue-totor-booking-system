@@ -2,20 +2,17 @@
 import { authClient } from "@/lib/auth-client";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { useRouter } from "next/navigation";
-
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-
 const BookSessionForm = ({ tutor }) => {
-
     const router = useRouter();
-
-    const { data, error, isPending } = authClient.useSession();
+    const { data, isPending } = authClient.useSession();
     const user = data?.user;
-    console.log("User data in BookSessionForm:", user);
 
-    const [slot, setSlot] = useState(tutor?.totalSlot);
+  
+    const [isOpen, setIsOpen] = useState(false);
+    // const [slot, setSlot] = useState(tutor?.totalSlot);
 
     const {
         tutorName,
@@ -30,9 +27,9 @@ const BookSessionForm = ({ tutor }) => {
         Institution
     } = tutor;
 
-
     const onSubmit = async (e) => {
         e.preventDefault();
+        
         const bookingData = {
             userId: user?.id,
             userImage: user?.image,
@@ -45,39 +42,48 @@ const BookSessionForm = ({ tutor }) => {
             imageUrl,
             sessionStartDate,
             availableDaysAndTimes,
-            // totalSlot: parseInt(totalSlot),
             location,
             status: "pending",
         };
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                // authorization: `Bearer ${tokenData?.token}`
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(bookingData)
+            });
 
-            },
-            body: JSON.stringify(bookingData)
-        });
-        const result = await res.json();
-        if (res.ok) {
-            toast.success("Session booked successfully!");
-            setSlot(prev => prev - 1);
-            router.push("/tutors")
+            if (res.ok) {
+                toast.success("Session booked successfully!");
+                setIsOpen(false);
+                router.refresh();
+            } else {
+                toast.error("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            // console.error("Booking error:", error);
+            toast.error("Failed to book session.");
         }
-
     };
 
     return (
         <div>
-            <Modal scrollBehavior="inside">
-                <Button variant="secondary" className={'bg-linear-to-r  from-[#4f39f6] to-[#9514fa] text-white font-medium'}>Book Session</Button>
+           
+            <Modal isOpen={isOpen} onOpenChange={setIsOpen} scrollBehavior="inside">
+                <Button 
+                    variant="secondary" 
+                    onClick={() => setIsOpen(true)} 
+                    className='bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white font-medium'
+                >
+                    Book Session
+                </Button>
                 <Modal.Backdrop>
                     <Modal.Container placement="auto">
                         <Modal.Dialog className="sm:max-w-md max-h-[90vh] flex flex-col">
                             <Modal.CloseTrigger />
                             <Modal.Header>
-
                                 <Modal.Heading>Book Session</Modal.Heading>
                                 <p className="mt-1.5 text-sm leading-5 text-muted">
                                     Please fill out the form below to book a session with the tutor.
@@ -100,37 +106,41 @@ const BookSessionForm = ({ tutor }) => {
                                         {/* tutor name  */}
                                         <TextField className="w-full" name="tutorName" type="text" variant="secondary" defaultValue={tutorName || ""}>
                                             <Label>Tutor Name</Label>
-                                            <Input placeholder="Enter tutor's name"
-                                            />
+                                            <Input placeholder="Enter tutor's name" />
                                         </TextField>
 
                                         {/* Email */}
                                         <TextField className="w-full" name="email" type="email" variant="secondary" defaultValue={user?.email || ""}>
                                             <Label>Email</Label>
-                                            <Input placeholder="Enter your email"
-                                            />
+                                            <Input placeholder="Enter your email" />
                                         </TextField>
 
                                         {/* id  */}
                                         <TextField className="w-full" name="tutorId" type="text" variant="secondary" defaultValue={_id || ""}>
                                             <Label>Tutor ID</Label>
-                                            <Input placeholder="Enter tutor's ID"
-                                            />
+                                            <Input placeholder="Enter tutor's ID" />
                                         </TextField>
 
                                         <Modal.Footer>
-                                            <Button slot="close" variant="secondary" className={" text-purple-500"}>
+                                           
+                                            <Button 
+                                                type="button" 
+                                                onClick={() => setIsOpen(false)} 
+                                                variant="secondary" 
+                                                className="text-purple-500"
+                                            >
                                                 Cancel
                                             </Button>
-                                            <Button type="submit" className={'bg-linear-to-r  from-[#4f39f6] to-[#9514fa] text-white font-medium'}>
+                                            <Button 
+                                                type="submit" 
+                                                className='bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white font-medium'
+                                            >
                                                 Book Session
                                             </Button>
                                         </Modal.Footer>
-
                                     </form>
                                 </Surface>
                             </Modal.Body>
-
                         </Modal.Dialog>
                     </Modal.Container>
                 </Modal.Backdrop>
