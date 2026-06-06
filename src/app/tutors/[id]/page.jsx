@@ -1,3 +1,4 @@
+import BookSessionForm from "@/components/BookSessionForm";
 import Image from "next/image";
 
 
@@ -59,9 +60,10 @@ const tutor = await res.json();
         </div>
 
         <div className="pt-4">
-          <button className="px-6 py-2 border bg-linear-to-r  from-[#4f39f6] to-[#9514fa] rounded-md hover:bg-[#9514fa] text-white transition-colors duration-200 text-sm font-medium">
+          {/* <button className="px-6 py-2 border bg-linear-to-r  from-[#4f39f6] to-[#9514fa] rounded-md hover:bg-[#9514fa] text-white transition-colors duration-200 text-sm font-medium">
             Book Session
-          </button>
+          </button> */}
+          <BookSessionForm tutor={tutor} />
         </div>
       </div>
       

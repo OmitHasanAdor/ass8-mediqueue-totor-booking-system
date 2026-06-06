@@ -1,6 +1,7 @@
 'use client'
 import { FieldError, Input, Label, TextField ,Select, ListBox, TextArea, Button} from "@heroui/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const AddTutorsPage = () => {
 
@@ -19,7 +20,10 @@ const AddTutorsPage = () => {
             body:JSON.stringify(tutor)
         })
         const data = await res.json()
-        router.push("/tutors")
+        if(data){
+          toast.success("Tutor added successfully!")
+            router.push("/tutors")
+        }
         console.log(data)
     }
 

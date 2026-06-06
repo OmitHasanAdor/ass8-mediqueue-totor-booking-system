@@ -63,12 +63,12 @@ if (error) {
         isRequired
         name="email"
         type="email"
-        validate={(value) => {
-          if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-            return "Please enter a valid email address";
-          }
-          return null;
-        }}
+        // validate={(value) => {
+        //   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+        //     return "Please enter a valid email address";
+        //   }
+        //   return null;
+        // }}
       >
         <Label>Email Address</Label>
         <Input placeholder="Enter your email" />
