@@ -27,6 +27,13 @@ const BookSessionForm = ({ tutor }) => {
         Institution
     } = tutor;
 
+
+    const currentDate = new Date();
+    const sessionDate = new Date(sessionStartDate);
+    const isBookingNotAllowed = currentDate > sessionDate;
+    console.log(sessionStartDate, currentDate, isBookingNotAllowed);
+
+
     const onSubmit = async (e) => {
         e.preventDefault();
         
@@ -75,9 +82,14 @@ const BookSessionForm = ({ tutor }) => {
                 <Button 
                     variant="secondary" 
                     onClick={() => setIsOpen(true)} 
-                    className='bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white font-medium'
+                    disabled={isBookingNotAllowed}
+                   className={`font-medium transition-all duration-200 ${
+                    isBookingNotAllowed 
+                    ? 'bg-neutral-200 text-neutral-400 dark:bg-neutral-800 dark:text-neutral-600 cursor-not-allowed pointer-events-none' 
+                    : 'bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white active:scale-98'
+                }`}
                 >
-                    Book Session
+                  {isBookingNotAllowed ? "Session Booking Ended" : "Book Session"}
                 </Button>
                 <Modal.Backdrop>
                     <Modal.Container placement="auto">

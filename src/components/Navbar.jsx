@@ -6,11 +6,11 @@ import { useEffect } from "react";
 
 
 const Navbar = () => {
-    
+
 
     const { data, error, isPending } = authClient.useSession();
     const user = data?.user;
-  useEffect(() => {
+    useEffect(() => {
         if (isPending) {
             console.log("Session is loading...");
         } else {
@@ -42,19 +42,23 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1">
                     <li><Link href="/">Home</Link></li>
                     <li><Link href="/tutors">Tutors</Link></li>
-                    <li><Link href="/add-tutor">Add Tutor</Link></li>
-                    <li><Link href="/my-tutors">My Tutors</Link></li>
-                    <li><Link href="/my-booked-sessions">My Booked Sessions</Link></li>
+                    {data && (
+                        <>
+                            <li><Link href="/add-tutor">Add Tutor</Link></li>
+                            <li><Link href="/my-tutors">My Tutors</Link></li>
+                            <li><Link href="/my-booked-sessions">My Booked Sessions</Link></li>
+                        </>
+                    )}
                 </ul>
             </div>
 
             <div className="navbar-end ">
-              {data ?  <div className="dropdown dropdown-end">
+                {data ? <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
                             <Image
                                 alt="Tailwind CSS Navbar component"
-                               src={user?.image || 'https://cdn-icons-png.flaticon.com/512/3675/3675805.png'}
+                                src={user?.image || 'https://cdn-icons-png.flaticon.com/512/3675/3675805.png'}
                                 width={40}
                                 height={40}
                             />
@@ -66,16 +70,16 @@ const Navbar = () => {
                         <li>
                             <Link href={"/profile"} className=" font-semibold">
                                 Profile
-                               
+
                             </Link>
                         </li>
                         <li onClick={() => authClient.signOut()} className=" cursor-pointer">Logout</li>
                     </ul>
-                </div>:
-                <div className="">
-                <Link href={"/login"} className="btn btn-ghost">Login</Link>
-                <Link href={"/register"} className="btn btn-ghost">Register</Link>
-                </div>
+                </div> :
+                    <div className="">
+                        <Link href={"/login"} className="btn btn-ghost">Login</Link>
+                        <Link href={"/register"} className="btn btn-ghost">Register</Link>
+                    </div>
                 }
             </div>
         </div>
