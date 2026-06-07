@@ -3,12 +3,16 @@ import { authClient } from "@/lib/auth-client";
 import {Check} from "@gravity-ui/icons";
 import {Button, Description, FieldError, Form, Input, Label, TextField} from "@heroui/react";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 
 
 const RegisterPage = () => {
+   const searchParams = useSearchParams();
    const router = useRouter();
+
+   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
       const onSubmit = async (e) => {
     e.preventDefault();
@@ -20,13 +24,13 @@ const { data, error } = await authClient.signUp.email({
     email: user.email, // required
     password: user.password, 
     image:user.photo,
-    callbackURL: "/",
+    // callbackURL: callbackUrl,
 });
 if (error) {
-  alert(error.message);
+  toast.error(error.message);
 } else {
-    alert("Signup successful! Please check your email to verify your account.");
-     router.push("/");
+    toast.success("Signup successful! Redirecting...");
+    router.push(callbackUrl);
 }
 
   };

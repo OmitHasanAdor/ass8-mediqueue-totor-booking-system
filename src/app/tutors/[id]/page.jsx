@@ -30,7 +30,7 @@ const tutor = await res.json();
         <div>
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center md:items-start">
       
-      {/* Left Side: Image */}
+    
       <div className="w-full md:w-1/2">
         <Image
         width={400}
@@ -41,7 +41,7 @@ const tutor = await res.json();
         />
       </div>
 
-      {/* Right Side: Details */}
+     
       <div className="w-full md:w-1/2 space-y-4 my-auto text-gray-800">
         <div>
           <h2 className="text-3xl font-bold text-black mb-1">{tutorName}</h2>
@@ -54,8 +54,14 @@ const tutor = await res.json();
           <p><strong>Location:</strong> {location}</p>
           <p><strong>Mode:</strong> Online</p>
           <p><strong>Available & Time Slot:</strong> {availableDaysAndTimes}</p>
-          <p><strong>Hourly Fee:</strong> ৳{hourlyFee}/hr</p>
-          <p><strong>Remaining Slots:</strong> {totalSlot}</p>
+          <p><strong>Hourly Fee:</strong> ${hourlyFee}/hr</p>
+
+           { totalSlot === 0 ?
+          <p>
+           no remaining slots
+            </p>
+           : <p><strong>Remaining Slots:</strong> {totalSlot}</p> 
+            }
           <p><strong>Session Start Date:</strong> {sessionStartDate}</p>
         </div>
 

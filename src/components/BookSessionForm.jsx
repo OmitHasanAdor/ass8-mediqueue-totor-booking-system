@@ -50,8 +50,14 @@ const BookSessionForm = ({ tutor }) => {
             sessionStartDate,
             availableDaysAndTimes,
             location,
-            status: "pending",
+            status: "confirmed",
         };
+
+        
+    const BookedData = {
+      ...tutor,
+      tutorEmail: session?.user?.email,
+    };
 
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`, {
@@ -59,7 +65,7 @@ const BookSessionForm = ({ tutor }) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(bookingData)
+                body: JSON.stringify(BookedData)
             });
 
             if (res.ok) {
@@ -82,14 +88,14 @@ const BookSessionForm = ({ tutor }) => {
                 <Button 
                     variant="secondary" 
                     onClick={() => setIsOpen(true)} 
-                    disabled={isBookingNotAllowed}
+                    disabled={isBookingNotAllowed || totalSlot === 0}
                    className={`font-medium transition-all duration-200 ${
-                    isBookingNotAllowed 
+                    isBookingNotAllowed || totalSlot === 0
                     ? 'bg-neutral-200 text-neutral-400 dark:bg-neutral-800 dark:text-neutral-600 cursor-not-allowed pointer-events-none' 
                     : 'bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white active:scale-98'
                 }`}
                 >
-                  {isBookingNotAllowed ? "Session Booking Ended" : "Book Session"}
+                  {isBookingNotAllowed || totalSlot === 0 ? "Session Booking Ended" : "Book Session"}
                 </Button>
                 <Modal.Backdrop>
                     <Modal.Container placement="auto">

@@ -2,13 +2,18 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 
 const LoginPage = () => {
+    const searchParams = useSearchParams();
      const router = useRouter();
+
+     const callbackUrl = searchParams.get("callbackUrl") || "/";
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -20,10 +25,10 @@ const LoginPage = () => {
             callbackURL: "/",
         });
         if (error) {
-            alert(error.message);
+            toast.error(error.message);
         } else {
-            alert("Login successful! Redirecting to your dashboard...");
-            router.push("/");
+            toast.success("Login successful! Redirecting...");
+           router.push(callbackUrl);
         }
     };
 
