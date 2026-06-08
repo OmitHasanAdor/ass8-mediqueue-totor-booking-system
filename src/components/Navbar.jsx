@@ -3,6 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import ThemeSwitch from "./ThemeSwitch";
 
 
 const Navbar = () => {
@@ -81,6 +82,9 @@ const Navbar = () => {
                         <Link href={"/register"} className="btn btn-ghost">Register</Link>
                     </div>
                 }
+                <div className="">
+                    <ThemeSwitch></ThemeSwitch>
+                </div>
             </div>
         </div>
     );

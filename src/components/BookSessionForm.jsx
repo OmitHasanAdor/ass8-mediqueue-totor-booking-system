@@ -55,8 +55,8 @@ const BookSessionForm = ({ tutor }) => {
 
         
     const BookedData = {
-      ...tutor,
-      tutorEmail: session?.user?.email,
+      ...bookingData,
+      userEmail: user?.email,
     };
 
         try {

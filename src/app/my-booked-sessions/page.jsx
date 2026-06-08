@@ -1,49 +1,16 @@
-"use client";
+import MyBookedSessionsClient from "@/components/MyBookedSessionsClient";
 
-import { useEffect, useState } from "react";
-import { authClient } from "@/lib/auth-client";
+export const metadata = {
+  title: "My Booked Sessions | MediQueue",
+  description: "View and manage your booked tutoring sessions, track fees, status, or cancel bookings easily.",
+};
 
-const MyBookedSessions = () => {
-  const { data: session } = authClient.useSession();
-  const [bookings, setBookings] = useState([]);
-
-  useEffect(() => {
-    if (!session?.user?.email) return;
-
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/my-booked-sessions?email=${session.user.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setBookings(data));
-  }, [session]);
-
-  const handleCancel = async (id) => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${id}`,
-      {
-        method: "PATCH",
-      }
-    );
-
-    const data = await res.json();
-
-    if (data.modifiedCount > 0) {
-      // UI update without refetch
-      const updatedBookings = bookings.map((booking) =>
-        booking._id === id
-          ? { ...booking, status: "cancelled" }
-          : booking
-      );
-
-      setBookings(updatedBookings);
-    }
-  };
-
+const MyBookedSession = () => {
   return (
     <div>
-     
+      <MyBookedSessionsClient />;
     </div>
   );
 };
 
-export default MyBookedSessions;
+export default MyBookedSession;

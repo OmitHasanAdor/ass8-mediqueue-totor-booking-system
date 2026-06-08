@@ -1,12 +1,14 @@
 "use client";
 import { TrashBin } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const BookingDelete = ({tutor}) => {
+      const router = useRouter();
 
   const handleDelete = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${tutor._id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${tutor._id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -15,13 +17,18 @@ const BookingDelete = ({tutor}) => {
         const result = await res.json();
         if (res.ok) {
           toast.success("Booking deleted successfully!");
+          router.refresh();
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
+         
         //   redirect("/mybooking"); // Redirect to the bookings page after deletion
          
         }
     };
     return (
         <AlertDialog>
-            <Button variant="danger" className=" text-red-500 hover:text-red-800 border-2 border-red-500 hover:border-red-800">
+            <Button variant="danger" className=" text-2xl font-semibold ">
                 <TrashBin />
                 
             </Button>
