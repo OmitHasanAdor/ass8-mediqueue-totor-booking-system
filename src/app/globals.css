@@ -1,24 +1,23 @@
 @import "tailwindcss";
 @import "@heroui/styles";
-@plugin "daisyui";
+@plugin "daisyui" {
+  theme: "light"; /* ডিফল্ট থিম */
+  darkTheme: "dark"; /* ডার্ক মোড অ্যাক্টিভ হলে ডেইজিইউআই এই থিম নেবে */
+}
 
+/* 🎯 HeroUI কন্টেন্ট সোর্স */
 @source "../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* 🎯 ডার্ক ভ্যারিয়েন্ট */
+@variant dark (&:where(.dark, .dark *));
 
 :root {
   --accent: oklch(0.7 0.25 260);
   --success: oklch(0.65 0.15 155);
 }
 
-.dark {
-  color-scheme: dark !important;
-}
-
-
-.dark input, 
-.dark select, 
-.dark textarea,
-.dark label {
-  color: #ffffff !important;
+@layer base {
+  body {
+    @apply bg-background text-foreground min-h-screen transition-colors duration-300;
+  }
 }

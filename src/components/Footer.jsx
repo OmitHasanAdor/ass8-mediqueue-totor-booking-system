@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-50 border-t">
+    <footer className="bg-slate-50 dark:text-black border-t">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
        
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -98,7 +99,7 @@ const Footer = () => {
               href="#"
               className="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-blue-600 hover:text-white transition"
             >
-              <FaTwitter />
+              <FaXTwitter />
             </Link>
           </div>
         </div>

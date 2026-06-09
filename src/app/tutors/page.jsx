@@ -33,9 +33,9 @@ const TutorsPage = async ({ searchParams }) => {
   const tutors = await getTutors(resolvedSearchParams);
 
   return (
-    <div className="bg-white min-h-screen p-5">
+    <div className="min-h-screen p-5">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">
+        <h1 className="text-4xl font-bold text-center  mb-10">
           All Tutors
         </h1>
 

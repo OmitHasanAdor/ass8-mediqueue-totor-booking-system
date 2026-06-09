@@ -8,16 +8,32 @@ const MyTutorsTable = () => {
   const { data: session } = authClient.useSession();
   const [tutors, setTutors] = useState([]);
 
-  useEffect(() => {
-    if (!session?.user?.email) return;
+useEffect(() => {
+  if (!session?.user?.email) return;
 
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors?email=${session?.user?.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setTutors(data));
-  }, [session]);
+  const getTutorsData = async () => {
+    try {
+      const { data: tokenData } = await authClient.token();
+      console.log('tokenData', tokenData);
 
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors?email=${session?.user?.email}`, 
+        {
+          headers: {
+            authorization: `Bearer ${tokenData?.token}`
+          },
+        }
+      );
+      const data = await res.json();
+      setTutors(data);
+    } catch (error) {
+      console.error("Error fetching tutors:", error);
+    }
+  };
+
+  getTutorsData();
+
+}, [session?.user?.email]);
   return (
     <div className="w-full overflow-x-auto bg-white dark:bg-zinc-900 rounded-3xl shadow-md border border-gray-100 dark:border-zinc-800 transition-colors duration-300">
       

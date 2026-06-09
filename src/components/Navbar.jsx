@@ -21,7 +21,7 @@ const Navbar = () => {
     }, [data, isPending, user]);
 
     return (
-        <div className="navbar bg-base-100 shadow-sm sm:px-8 px-0 py-2 sticky top-0 z-10 ">
+        <div className="navbar bg-base-100 dark:bg-black dark:text-white shadow-sm sm:px-8 px-0 py-2 sticky top-0 z-10 ">
             <div className="navbar-start  ">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -82,7 +82,7 @@ const Navbar = () => {
                         <Link href={"/register"} className="btn btn-ghost">Register</Link>
                     </div>
                 }
-                <div className="">
+                <div className=" mx-2">
                     <ThemeSwitch></ThemeSwitch>
                 </div>
             </div>

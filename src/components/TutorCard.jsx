@@ -26,7 +26,7 @@ const TutorCard = ({ tutor }) => {
   };
 
   return (
-    <div className="max-w-md w-full bg-white rounded-[2rem] shadow-xl overflow-hidden border border-gray-100 font-sans mx-auto">
+    <div className="max-w-md w-full  rounded-[2rem] shadow-xl overflow-hidden border border-gray-100 font-sans mx-auto">
       {/* Tutor Image */}
       <div className="w-full h-64 overflow-hidden rounded-2xl p-4 pb-0">
         <Image
@@ -42,23 +42,23 @@ const TutorCard = ({ tutor }) => {
       <div className="p-5 pt-3">
        
         <div className="mb-4">
-          <h2 className="text-2xl font-bold text-gray-900">{tutorName}</h2>
-          <div className="flex items-center gap-2 mt-1 text-gray-800">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-200">{tutorName}</h2>
+          <div className="flex items-center gap-2 mt-1 text-gray-800 dark:text-gray-300">
             <FaUniversity className="text-gray-400 shrink-0" />
             <span className="text-sm font-medium">{Institution}</span>
           </div>
         </div>
 
       
-        <div className="space-y-3 my-5 border-t border-b border-gray-50 py-4 text-sm text-gray-600">
+        <div className="space-y-3 my-5 border-t border-b border-gray-50 py-4 text-sm text-gray-600 dark:text-gray-200">
           <div className="flex items-center gap-3">
             <FaClock className="text-gray-400 w-4 shrink-0" />
-            <p><span className="font-semibold text-gray-800">Available:</span> {availableDaysAndTimes}</p>
+            <p><span className="font-semibold text-gray-800 dark:text-gray-200">Available:</span> {availableDaysAndTimes}</p>
           </div>
 
           <div className="flex items-center gap-3">
             <FaCalendarAlt className="text-gray-400 w-4 shrink-0" />
-            <p><span className="font-semibold text-gray-800">Session Start Date:</span> {formatDate(sessionStartDate)}</p>
+            <p><span className="font-semibold text-gray-800 dark:text-gray-200">Session Start Date:</span> {formatDate(sessionStartDate)}</p>
           </div>
         </div>
 
@@ -66,7 +66,7 @@ const TutorCard = ({ tutor }) => {
         <div className="space-y-4 pt-1">
           <div className="flex items-baseline gap-1">
             <span className="text-gray-500 text-sm font-medium">Fee:</span>
-            <span className="text-2xl font-extrabold text-gray-900">৳{hourlyFee}</span>
+            <span className="text-2xl font-extrabold text-gray-900 dark:text-gray-200">৳{hourlyFee}</span>
             <span className="text-gray-500 text-sm">/hr</span>
           </div>
 

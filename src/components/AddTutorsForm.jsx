@@ -17,11 +17,17 @@ const AddTutorsForm = () => {
       ...tutor,
       userEmail: session?.user?.email,
     };
+
+
+     const {data:tokenData}= await authClient.token()
+    console.log('tokenData',tokenData)
     
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors`, {
       method: "POST",
       headers: {
-        "Content-Type": 'application/json'
+        "Content-Type": 'application/json',
+         authorization: `Bearer ${tokenData?.token}`
+        
       },
       body: JSON.stringify(tutorData)
     });
@@ -149,7 +155,7 @@ const AddTutorsForm = () => {
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" variant="outline" className="rounded-none w-full bg-cyan-500 text-white">
+      <Button type="submit" variant="outline" className="rounded-none w-full bg-linear-to-r  from-[#4f39f6] to-[#9514fa] text-white">
         Add Tutor
       </Button>
     </form>

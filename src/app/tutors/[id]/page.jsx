@@ -1,4 +1,6 @@
 import BookSessionForm from "@/components/BookSessionForm";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Image from "next/image";
 
 
@@ -21,9 +23,14 @@ export async function generateMetadata({ params }) {
 const TutorsDetailPage = async ({ params }) => {
 
   const { id } = await params;
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+
+ 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`, {
     headers: {
-      // authorization: `Bearer ${token}`
+      authorization: `Bearer ${token}`
     }
   });
 
@@ -44,7 +51,7 @@ const TutorsDetailPage = async ({ params }) => {
 
   return (
     <div>
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center md:items-start">
+      <div className="max-w-4xl mx-auto rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center md:items-start">
 
 
         <div className="w-full md:w-1/2">
@@ -58,9 +65,9 @@ const TutorsDetailPage = async ({ params }) => {
         </div>
 
 
-        <div className="w-full md:w-1/2 space-y-4 my-auto text-gray-800">
+        <div className="w-full md:w-1/2 space-y-4 my-auto text-gray-800 dark:text-gray-200">
           <div>
-            <h2 className="text-3xl font-bold text-black mb-1">{tutorName}</h2>
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-1">{tutorName}</h2>
             <p className="text-gray-500 italic mb-4">Mathematics</p>
           </div>
 

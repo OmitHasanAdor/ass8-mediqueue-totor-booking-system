@@ -8,39 +8,45 @@ import { toast } from "react-hot-toast";
 const MyBookedSessionsClient = () => {
   const { data: session, isPending: isSessionLoading } = authClient.useSession();
   const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(false); 
-  const [isMounted, setIsMounted] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
 
-useEffect(() => {
+  useEffect(() => {
 
-  const timer = setTimeout(() => {
-    setIsMounted(true);
-  }, 0);
+    const timer = setTimeout(() => {
+      setIsMounted(true);
+    }, 0);
 
-  return () => clearTimeout(timer); 
-}, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (!session?.user?.email) return;
 
     const fetchBookings = async () => {
       try {
-        setLoading(true); 
+        setLoading(true);
+        const { data: tokenData } = await authClient.token()
+        console.log('tokenData', tokenData)
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/my-booked-sessions?email=${session.user.email}`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/my-booked-sessions?email=${session.user.email}`, {
+          headers: {
+            authorization: `Bearer ${tokenData?.token}`
+          },
+        }
         );
         const data = await res.json();
         setBookings(data);
       } catch (err) {
         console.error("Error fetching bookings:", err);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchBookings();
-  }, [session?.user?.email]); 
+  }, [session?.user?.email]);
 
   const handleCancel = async (id) => {
     try {
@@ -89,7 +95,7 @@ useEffect(() => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">My Booked Sessions</h2>
-      
+
       {loading ? (
         <div className="text-center p-10 text-gray-600 dark:text-gray-400 font-medium">
           Loading your booked sessions...

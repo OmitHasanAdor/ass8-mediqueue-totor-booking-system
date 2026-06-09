@@ -56,7 +56,7 @@ const RegisterClient = () => {
       <h1 className="text-3xl font-medium text-center mt-8">Create Account</h1>
       <p className="text-center">Start your adventure with MediQueue</p>
       <div className="max-w-105 my-8 border shadow-sm rounded-md mx-auto p-5 space-y-3">
-        <Form className="flex w-96 flex-col gap-4 mx-auto" onSubmit={onSubmit}>
+        <Form className="flex max-w-96 flex-col gap-4 mx-auto" onSubmit={onSubmit}>
           
           {/* Full Name */}
           <TextField

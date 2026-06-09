@@ -11,7 +11,7 @@ const ProfileInfo = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 p-4 sm:p-6 lg:p-8 transition-colors duration-300">
       
-      <div className="max-w-5xl w-full bg-white dark:bg-zinc-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row items-center justify-between p-6 gap-8 md:gap-12 border border-gray-100 dark:border-zinc-800 transition-colors duration-300">
+      <div className="max-w-5xl w-full bg-white dark:bg-zinc-900 rounded-2xl shadow-lg overflow-hidden flex flex-col-reverse md:flex-row items-center justify-between p-6 gap-8 md:gap-12 border border-gray-100 dark:border-zinc-800 transition-colors duration-300">
         
       
         <div className="w-full md:w-1/2 flex justify-center items-center">

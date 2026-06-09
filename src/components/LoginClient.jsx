@@ -2,7 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
-import { Button, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { Button, FieldError,Description, Form, Input, Label, TextField } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import Link from "next/link";
@@ -57,7 +57,7 @@ const LoginClient = () => {
       <h2 className="text-3xl font-medium text-center mt-8">Login to Your Account</h2>
       <p className="text-center">Welcome back! Please enter your details.</p>
       <div className="max-w-105 my-8 border shadow-sm rounded-md mx-auto p-5 space-y-3">
-        <Form className="flex w-96 flex-col gap-4 mx-auto p-5" onSubmit={onSubmit}>
+        <Form className="flex max-w-96 flex-col gap-4 mx-auto p-5" onSubmit={onSubmit}>
 
           {/* Email Field */}
           <TextField 
@@ -76,12 +76,29 @@ const LoginClient = () => {
             <FieldError />
           </TextField>
 
-          {/* Password Field */}
-          <TextField isRequired name="password" type="password">
+            {/* Password */}
+          <TextField
+            isRequired
+            minLength={8}
+            name="password"
+            type="password"
+            validate={(value) => {
+              if (value.length < 8) {
+                return "Password must be at least 8 characters";
+              }
+              if (!/[A-Z]/.test(value)) {
+                return "Password must contain at least one uppercase letter";
+              }
+              if (!/[0-9]/.test(value)) {
+                return "Password must contain at least one number";
+              }
+              return null;
+            }}
+          >
             <Label>Password</Label>
-            <Input placeholder="Enter your password" />
-            
-            <div className="mt-2 text-right">
+            <Input placeholder="Create a password" />
+            <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
+              <div className="mt-2 text-right">
               <Link href="/forgot-password" className="text-xs text-cyan-500 hover:underline font-semibold">
                 Forgot password?
               </Link>
