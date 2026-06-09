@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MediQueue – Tutor Booking & Management System
 
-## Getting Started
+### MediQueue is a modern, highly user-friendly, and fully responsive web application designed for booking medical tutors and managing study sessions. The platform provides a smooth shopping-style experience for students looking for the right guidance, combined with an advanced dark/light mode UI and secure authentication.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Frontend Framework:** React.js & Next.js (App Router)
+* **Authentication:** Better Auth (with JWT & JWKS Security)
+* **Styling & UI Components:** Tailwind CSS (v4), HeroUI (formerly NextUI), and DaisyUI
+* **State & Data Fetching:** React Hooks (`useState`, `useEffect`), Native Fetch API
+* **Notifications:** React Hot Toast (NPM Package)
+* **Icons:** React Icons
+* **Database Integration:** MongoDB (via Express.js REST API backend)
+* **Deployment:** Vercel
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features 
 
-## Learn More
+1. **Secure Authentication:** Robust user login and signup system powered by Better Auth.
+2. **JWT & JWKS Token Verification:** Advanced security architecture utilizing JSON Web Key Sets (JWKS) to verify tokens on the backend without exposing secrets.
+3. **Dynamic Theme Toggle:** Complete Dark and Light mode support across all components using `next-themes`, synced seamlessly between HeroUI and DaisyUI.
+4. **Smart Filters & Date Pickers:** Interactive tutor search filtering by name and specific start/end dates.
+5. **Dynamic Routing & Details:** Dynamic server-side routing for individual tutor profiles with built-in `error.jsx` and `not-found.jsx` boundary handling for invalid IDs.
+6. **Tutor Management Dashboard:** Dedicated sections for users to view "My Booked Sessions" (with authorization control to cancel sessions) and "My Tutors Table" to track registrations.
+7. **Fully Responsive UI:** A beautifully optimized layout using Tailwind CSS that adapts perfectly to mobile, tablet, and desktop screens.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
