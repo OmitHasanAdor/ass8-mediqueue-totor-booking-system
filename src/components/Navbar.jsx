@@ -29,12 +29,16 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-semibold">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-semibold dark:text-gray-400">
                         <li><Link href="/">Home</Link></li>
                         <li><Link href="/tutors">Tutors</Link></li>
-                        <li><Link href="/add-tutor">Add Tutor</Link></li>
-                        <li><Link href="/my-tutors">My Tutors</Link></li>
-                        <li><Link href="/my-booked-sessions">My Booked Sessions</Link></li>
+                        {data && (
+                            <>
+                                <li><Link href="/add-tutor">Add Tutor</Link></li>
+                                <li><Link href="/my-tutors">My Tutors</Link></li>
+                                <li><Link href="/my-booked-sessions">My Booked Sessions</Link></li>
+                            </>
+                        )}
                     </ul>
                 </div>
                 <Link href="/" className="btn btn-ghost text-2xl font-bold bg-linear-to-r  from-[#4f39f6] to-[#9514fa] bg-clip-text text-transparent">MediQueue</Link>
@@ -79,7 +83,7 @@ const Navbar = () => {
                 </div> :
                     <div className="">
                         <Link href={"/login"} className="btn btn-ghost">Login</Link>
-                        <Link href={"/register"} className="btn btn-ghost">Register</Link>
+                        <Link href={"/register"} className="btn btn-ghost hidden sm:inline-block">Register</Link>
                     </div>
                 }
                 <div className=" mx-2">
