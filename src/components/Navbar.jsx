@@ -81,7 +81,7 @@ const Navbar = () => {
                         <li onClick={() => authClient.signOut()} className=" cursor-pointer">Logout</li>
                     </ul>
                 </div> :
-                    <div className="">
+                    <div className=" flex items-center">
                         <Link href={"/login"} className="btn btn-ghost">Login</Link>
                         <Link href={"/register"} className="btn btn-ghost hidden sm:flex">Register</Link>
                     </div>
