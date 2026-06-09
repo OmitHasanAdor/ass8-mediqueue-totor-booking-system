@@ -49,7 +49,7 @@ const FilterBar = ({ currentSearch, currentStartDate, currentEndDate }) => {
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          className="w-full p-2.5 border border-gray-200 rounded-xl  text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-2.5 border dark:text-gray-200 border-gray-200 rounded-xl  text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
 
@@ -60,7 +60,7 @@ const FilterBar = ({ currentSearch, currentStartDate, currentEndDate }) => {
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="w-full p-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-2.5 border dark:text-gray-200 border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
 
