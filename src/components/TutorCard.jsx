@@ -26,7 +26,7 @@ const TutorCard = ({ tutor }) => {
   };
 
   return (
-    <div className="max-w-md w-full  rounded-[2rem] shadow-xl overflow-hidden border border-gray-100 font-sans mx-auto">
+    <div className="max-w-md w-full dark:bg-black rounded-[2rem] shadow-xl overflow-hidden border border-gray-100 font-sans mx-auto">
       {/* Tutor Image */}
       <div className="w-full h-64 overflow-hidden rounded-2xl p-4 pb-0">
         <Image
