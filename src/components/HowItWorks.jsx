@@ -33,7 +33,7 @@ const HowItWorks = () => {
             <section className="py-16 bg-base-50 px-4 sm:px-8 max-w-7xl mx-auto">
               
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-base-content tracking-tight">
+                    <h2 className="text-3xl font-bold text-base-content dark:text-white tracking-tight">
                         How It Works
                     </h2>
                 </div>

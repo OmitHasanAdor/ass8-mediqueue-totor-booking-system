@@ -36,7 +36,7 @@ const FeatureSection = () => {
             <section className="py-16 bg-base-50 px-4 sm:px-8 max-w-7xl mx-auto">
                
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-base-content tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-base-content dark:text-white tracking-tight">
                         Why Choose <span className="bg-linear-to-r from-[#4f39f6] to-[#9514fa] bg-clip-text text-transparent">MediQueue</span>?
                     </h2>
                     <div className="w-16 h-1 bg-linear-to-r from-[#4f39f6] to-[#9514fa] mx-auto mt-3 rounded-full"></div>
@@ -50,12 +50,12 @@ const FeatureSection = () => {
                             className="bg-white dark:bg-black dark:text-white border border-base-200 p-8 rounded-2xl transition-all duration-200 ease-in-out hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer flex flex-col items-center text-center"
                         >
                            
-                            <div className="mb-4 p-3 bg-base-100 rounded-xl">
+                            <div className="mb-4 p-3 bg-base-100 dark:bg-neutral-800 rounded-xl">
                                 {feature.icon}
                             </div>
 
                            
-                            <h3 className="text-xl font-bold text-base-content mb-2">
+                            <h3 className="text-xl font-bold text-base-content dark:text-white mb-2">
                                 {feature.title}
                             </h3>
 
