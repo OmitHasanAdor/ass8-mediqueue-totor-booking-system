@@ -99,7 +99,7 @@ const LoginClient = () => {
             <Input placeholder="Create a password" />
             <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
               <div className="mt-2 text-right">
-              <Link href="/forgot-password" className="text-xs text-cyan-500 hover:underline font-semibold">
+              <Link href="/register" className="text-xs text-cyan-500 hover:underline font-semibold">
                 Forgot password?
               </Link>
             </div>
