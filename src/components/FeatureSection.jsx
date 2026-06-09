@@ -47,7 +47,7 @@ const FeatureSection = () => {
                     {features.map((feature) => (
                         <div
                             key={feature.id}
-                            className="bg-white dark:bg-base-100 border border-base-200 p-8 rounded-2xl transition-all duration-200 ease-in-out hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer flex flex-col items-center text-center"
+                            className="bg-white dark:bg-black dark:text-white border border-base-200 p-8 rounded-2xl transition-all duration-200 ease-in-out hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer flex flex-col items-center text-center"
                         >
                            
                             <div className="mb-4 p-3 bg-base-100 rounded-xl">

@@ -43,7 +43,7 @@ const HowItWorks = () => {
                     {steps.map((step) => (
                         <div
                             key={step.id}
-                            className="bg-white dark:bg-base-100 border border-base-200 p-8 rounded-2xl transition-all duration-200 ease-in-out hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer flex flex-col items-center text-center"
+                            className="bg-white dark:bg-black  border border-base-200 p-8 rounded-2xl transition-all duration-200 ease-in-out hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer flex flex-col items-center text-center"
                         >
                            
                             <div className="flex flex-col items-center gap-2 mb-3">
@@ -56,12 +56,12 @@ const HowItWorks = () => {
                             </div>
 
                            
-                            <h3 className="text-lg font-bold text-base-content mb-2">
+                            <h3 className="text-lg dark:text-white font-bold text-base-content mb-2">
                                 {step.title}
                             </h3>
 
                            
-                            <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                            <p className="text-sm text-neutral-500 dark:text-gray-400 leading-relaxed">
                                 {step.description}
                             </p>
                         </div>
