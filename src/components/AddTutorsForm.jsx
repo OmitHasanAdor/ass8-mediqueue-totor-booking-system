@@ -114,7 +114,7 @@ const AddTutorsForm = () => {
         <div className="md:col-span-2">
           <TextField name="sessionStartDate" type="date" isRequired>
             <Label>Session Start Date</Label>
-            <Input type="date" className="rounded-2xl" />
+            <Input type="date" className="rounded-2xl dark:text-gray-200 " />
             <FieldError />
           </TextField>
         </div>
