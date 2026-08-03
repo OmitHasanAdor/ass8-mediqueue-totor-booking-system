@@ -10,10 +10,10 @@ const ProfileInfo = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 p-4 sm:p-6 lg:p-8 transition-colors duration-300">
-      
-      <div className="max-w-5xl w-full bg-white dark:bg-zinc-900 rounded-2xl shadow-lg overflow-hidden flex flex-col-reverse md:flex-row items-center justify-between p-6 gap-8 md:gap-12 border border-gray-100 dark:border-zinc-800 transition-colors duration-300">
-        
-      
+
+      <div className="max-w-5xl w-full bg-white dark:bg-zinc-900 rounded-3xl shadow-xl overflow-hidden flex flex-col-reverse md:flex-row items-center justify-between p-6 sm:p-8 gap-8 md:gap-12 border border-gray-100 dark:border-zinc-800 transition-colors duration-300">
+
+        {/* Illustration */}
         <div className="w-full md:w-1/2 flex justify-center items-center">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg">
             <DotLottieReact
@@ -24,46 +24,48 @@ const ProfileInfo = () => {
           </div>
         </div>
 
-     
+        {/* Profile Details */}
         <div className="w-full md:w-1/2">
-          <div className="max-w-md mx-auto w-full">
-            
-          
-            <div className="mb-6 pb-4 border-b border-gray-100 dark:border-zinc-800 flex items-center gap-4">
+          <div className="max-w-md mx-auto w-full flex flex-col gap-6">
+
+            {/* Header */}
+            <div className="pb-5 border-b border-gray-100 dark:border-zinc-800 flex items-center gap-4">
               {session?.user?.image ? (
                 <Image
                   width={64}
-                  height={64} 
-                  src={session?.user.image} 
-                  alt={session?.user.name || "User"} 
-                  className="w-16 h-16 rounded-full object-cover border-2 border-blue-500"
+                  height={64}
+                  src={session?.user.image}
+                  alt={session?.user.name || "User"}
+                  className="w-16 h-16 shrink-0 rounded-full object-cover border-2 border-blue-500"
                 />
               ) : (
-                <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl">
+                <div className="w-16 h-16 shrink-0 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl">
                   {session?.user?.name ? session?.user.name[0] : "U"}
                 </div>
               )}
               <div>
-                <h2 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">My Profile</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">Manage your personal information</p>
+                <h2 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100 leading-tight">
+                  My Profile
+                </h2>
+                <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">
+                  Manage your personal information
+                </p>
               </div>
             </div>
 
-        
-            <div className="space-y-4">
-              
-           
-              <div className="bg-blue-50/50 dark:bg-blue-950/20 p-4 rounded-xl border border-blue-100/50 dark:border-blue-900/30">
+            {/* Info fields */}
+            <div className="flex flex-col gap-3">
+
+              <div className="bg-blue-50/50 dark:bg-blue-950/20 p-4 rounded-xl border border-blue-100/50 dark:border-blue-900/30 hover:border-blue-200 dark:hover:border-blue-800 transition-colors">
                 <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider block mb-1">
                   Full Name
                 </span>
-                <span className="text-lg font-bold text-gray-800 dark:text-gray-200 block">
+                <span className="text-lg font-bold text-gray-800 dark:text-gray-200 block truncate">
                   {session?.user?.name || "N/A"}
                 </span>
               </div>
 
-            
-              <div className="bg-gray-50 dark:bg-zinc-800/40 p-4 rounded-xl border border-gray-100 dark:border-zinc-800">
+              <div className="bg-gray-50 dark:bg-zinc-800/40 p-4 rounded-xl border border-gray-100 dark:border-zinc-800 hover:border-gray-200 dark:hover:border-zinc-700 transition-colors">
                 <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-1">
                   Email Address
                 </span>
@@ -73,7 +75,6 @@ const ProfileInfo = () => {
               </div>
 
             </div>
-
           </div>
         </div>
 
