@@ -10,11 +10,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
         
           <div className="md:col-span-2">
-            <h2 className="text-3xl font-bold text-slate-900">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
               MediQueue
             </h2>
 
-            <p className="mt-4 text-slate-600 max-w-md leading-relaxed">
+            <p className="mt-4 text-slate-600 dark:text-white max-w-md leading-relaxed">
               Connect with qualified tutors effortlessly. Book sessions,
               schedule lessons, and learn from trusted educators all in one
               place.
@@ -35,9 +35,9 @@ const Footer = () => {
 
          
           <div>
-            <h3 className="font-semibold text-slate-900 mb-4"> Quick Links</h3>
+            <h3 className="font-semibold text-slate-900 dark:text-white mb-4"> Quick Links</h3>
 
-            <ul className="space-y-3 text-slate-600">
+            <ul className="space-y-3 text-slate-600 dark:text-white">
               <li>
                 <Link href="/" className="hover:text-blue-600 transition">Home</Link>
               </li>
@@ -64,9 +64,9 @@ const Footer = () => {
 
          
           <div>
-            <h3 className="font-semibold text-slate-900 mb-4"> Contact </h3>
+            <h3 className="font-semibold text-slate-900 dark:text-white mb-4"> Contact </h3>
 
-            <ul className="space-y-3 text-slate-600">
+            <ul className="space-y-3 text-slate-600 dark:text-white">
               <li>ibneshams05@gmail.com</li>
               <li>+880 1234 567 890</li>
               <li>Available 24/7</li>
@@ -76,7 +76,7 @@ const Footer = () => {
 
       
         <div className="mt-12 pt-6 border-t flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-white">
             © 2026 MediQueue. All rights reserved.
           </p>
 
