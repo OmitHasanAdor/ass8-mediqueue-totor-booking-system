@@ -1,4 +1,8 @@
-# MediQueue – Tutor Booking & Management System
+# 🩺 MediQueue – Tutor Booking & Management System
+
+[![Live Site](https://img.shields.io/badge/Live%20Site-Visit-blue?style=for-the-badge)](https://ass8-mediqueue-totor-booking-system.vercel.app/)
+[![Client Repo](https://img.shields.io/badge/Client-Repository-black?style=for-the-badge&logo=github)](https://github.com/OmitHasanAdor/ass8-mediqueue-totor-booking-system)
+[![Server Repo](https://img.shields.io/badge/Server-Repository-green?style=for-the-badge&logo=github)](https://github.com/OmitHasanAdor/ass8-mediqueue-server)
 
 ### MediQueue is a modern, highly user-friendly, and fully responsive web application designed for booking medical tutors and managing study sessions. The platform provides a smooth shopping-style experience for students looking for the right guidance, combined with an advanced dark/light mode UI and secure authentication.
 
@@ -27,5 +31,12 @@
 6. **Tutor Management Dashboard:** Dedicated sections for users to view "My Booked Sessions" (with authorization control to cancel sessions) and "My Tutors Table" to track registrations.
 7. **Fully Responsive UI:** A beautifully optimized layout using Tailwind CSS that adapts perfectly to mobile, tablet, and desktop screens.
 
+---
 
+## 🔗 Project Links
 
+| Resource | Link |
+|---|---|
+| 🌐 Live Site | [ass8-mediqueue-totor-booking-system.vercel.app](https://ass8-mediqueue-totor-booking-system.vercel.app/) |
+| 💻 Client Repository | [github.com/OmitHasanAdor/ass8-mediqueue-totor-booking-system](https://github.com/OmitHasanAdor/ass8-mediqueue-totor-booking-system) |
+| 🖥️ Server Repository | [github.com/OmitHasanAdor/ass8-mediqueue-server](https://github.com/OmitHasanAdor/ass8-mediqueue-server) |
