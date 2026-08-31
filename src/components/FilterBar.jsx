@@ -64,7 +64,6 @@ const FilterBar = ({ currentSearch, currentStartDate, currentEndDate }) => {
         />
       </div>
 
-      {/* Reset Button */}
       <div>
         <button
           onClick={handleReset}
