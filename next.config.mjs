@@ -1,24 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   reactCompiler: true,
-   images: {
+
+  images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
-        pathname: '**',
+        protocol: "https",
+        hostname: "**",
+        pathname: "**",
       },
       {
-        protocol: 'http',
-        hostname: '**',
-        pathname: '**',
+        protocol: "http",
+        hostname: "**",
+        pathname: "**",
       },
     ],
   },
-  experimental: {
-serverComponentsExternalPackages: ['@better-auth/kysely-adapter'],
-},
+
+  // ✅ Correct way for Next.js 16
+  serverExternalPackages: [
+    "mongodb",
+    "better-auth",
+    "@better-auth/mongo-adapter",
+  ],
 };
 
 export default nextConfig;
