@@ -16,13 +16,6 @@ const nextConfig = {
       },
     ],
   },
-
-  // ✅ Correct way for Next.js 16
-  serverExternalPackages: [
-    "mongodb",
-    "better-auth",
-    "@better-auth/mongo-adapter",
-  ],
 };
 
 export default nextConfig;

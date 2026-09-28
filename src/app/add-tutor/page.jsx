@@ -6,6 +6,8 @@ export const metadata = {
   description: "Become a tutor, add your details, teaching subjects, and start sharing your knowledge.",
 };
 
+
+
 const AddTutorsPage = () => {
   return (
     <div className="max-w-7xl mx-auto mt-5">
