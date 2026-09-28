@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import {
   FiHome,
@@ -45,6 +48,23 @@ import { FiSearch } from "react-icons/fi";
 const Sidebar = ({ role = "student", userName = "User", userEmail = "" }) => {
   const pathname = usePathname();
   const items = menuItems[role] || menuItems.student;
+  const router = useRouter();
+
+const handleLogout = async () => {
+  try {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("Logged out successfully");
+          router.push("/login");
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Logout error:", error);
+    toast.error("Failed to logout");
+  }
+};
 
   return (
     <aside className="w-full md:w-64 min-h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col transition-colors duration-300">
@@ -95,19 +115,16 @@ const Sidebar = ({ role = "student", userName = "User", userEmail = "" }) => {
         })}
       </nav>
 
-      {/* Logout */}
-      <div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800">
-        <button
-          onClick={() => {
-            // Better Auth logout call later
-            window.location.href = "/api/auth/sign-out";
-          }}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-        >
-          <FiLogOut className="w-5 h-5" />
-          <span>Logout</span>
-        </button>
-      </div>
+   {/* Logout */}
+<div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800">
+  <button
+    onClick={handleLogout}
+    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+  >
+    <FiLogOut className="w-5 h-5" />
+    <span>Logout</span>
+  </button>
+</div>
     </aside>
   );
 };

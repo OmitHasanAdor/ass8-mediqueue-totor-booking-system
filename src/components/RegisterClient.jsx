@@ -2,15 +2,27 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
-import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import {
+  Button,
+  Description,
+  FieldError,
+  Form,
+  Input,
+  Label,
+  TextField,
+} from "@heroui/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
+import { FiUser, FiBookOpen } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const RegisterClient = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [selectedRole, setSelectedRole] = useState("student");
 
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
@@ -25,7 +37,8 @@ const RegisterClient = () => {
       name: user.name,
       email: user.email,
       password: user.password,
-      image: user.photo,
+      image: user.photo || undefined,
+      role: selectedRole,
     });
 
     toast.dismiss(loadingToast);
@@ -34,7 +47,12 @@ const RegisterClient = () => {
       toast.error(error.message);
     } else {
       toast.success("Signup successful! Redirecting...");
-      router.push(callbackUrl);
+
+      if (selectedRole === "tutor") {
+        router.push("/dashboard/tutor");
+      } else {
+        router.push("/dashboard/student");
+      }
     }
   };
 
@@ -53,7 +71,6 @@ const RegisterClient = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-50 dark:bg-black">
       <div className="w-full max-w-md">
-
         {/* Header */}
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
@@ -66,8 +83,56 @@ const RegisterClient = () => {
 
         {/* Card */}
         <div className="bg-white dark:bg-gray-900/60 border border-gray-100 dark:border-gray-800 shadow-lg rounded-2xl p-6 sm:p-8">
-          <Form className="flex flex-col gap-5" onSubmit={onSubmit}>
+          
+          {/* Role Selection - Clean Tab Style */}
+          <div className="mb-6">
+            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+              Register As
+            </p>
 
+            <div className="relative flex p-1 bg-gray-100 dark:bg-gray-800 rounded-xl">
+              {/* Animated Background */}
+              <motion.div
+                layoutId="roleTab"
+                className="absolute top-1 bottom-1 rounded-lg bg-white dark:bg-gray-700 shadow-sm"
+                style={{
+                  width: "50%",
+                  left: selectedRole === "student" ? "4px" : "calc(50% - 4px)",
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              />
+
+              {/* Student Tab */}
+              <button
+                type="button"
+                onClick={() => setSelectedRole("student")}
+                className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                  selectedRole === "student"
+                    ? "text-[#4f39f6]"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                }`}
+              >
+                <FiUser className="w-4 h-4" />
+                Student
+              </button>
+
+              {/* Tutor Tab */}
+              <button
+                type="button"
+                onClick={() => setSelectedRole("tutor")}
+                className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                  selectedRole === "tutor"
+                    ? "text-[#4f39f6]"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                }`}
+              >
+                <FiBookOpen className="w-4 h-4" />
+                Tutor
+              </button>
+            </div>
+          </div>
+
+          <Form className="flex flex-col gap-5" onSubmit={onSubmit}>
             {/* Full Name */}
             <TextField
               isRequired
@@ -79,22 +144,28 @@ const RegisterClient = () => {
                 return null;
               }}
             >
-              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Full Name</Label>
-              <Input placeholder="Enter your name" className="rounded-lg" />
+              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Full Name
+              </Label>
+              <Input placeholder="Enter your full name" className="rounded-lg" />
               <FieldError />
             </TextField>
 
-            {/* Email Address */}
+            {/* Email */}
             <TextField isRequired name="email" type="email">
-              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Email Address</Label>
+              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Email
+              </Label>
               <Input placeholder="Enter your email" className="rounded-lg" />
               <FieldError />
             </TextField>
 
-            {/* Photo URL */}
-            <TextField isRequired name="photo" type="url">
-              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Photo URL</Label>
-              <Input placeholder="Enter your photo URL" className="rounded-lg" />
+            {/* Photo URL (optional) */}
+            <TextField name="photo">
+              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Photo URL (Optional)
+              </Label>
+              <Input placeholder="https://example.com/photo.jpg" className="rounded-lg" />
               <FieldError />
             </TextField>
 
@@ -117,7 +188,9 @@ const RegisterClient = () => {
                 return null;
               }}
             >
-              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Password</Label>
+              <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Password
+              </Label>
               <Input placeholder="Create a password" className="rounded-lg" />
               <Description className="text-xs text-gray-400">
                 Must be at least 8 characters with 1 uppercase and 1 number
@@ -127,17 +200,19 @@ const RegisterClient = () => {
 
             <Button
               type="submit"
-              className="w-full rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2.5 flex items-center justify-center gap-2 transition-colors"
+              className="w-full rounded-lg bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white font-semibold py-2.5 flex items-center justify-center gap-2 transition-all hover:opacity-90"
             >
               <Check className="w-4 h-4" />
-              Create Account
+              Create Account as {selectedRole === "student" ? "Student" : "Tutor"}
             </Button>
           </Form>
 
           {/* Divider */}
           <div className="flex items-center gap-3 my-6">
             <hr className="flex-1 border-t border-gray-200 dark:border-gray-800" />
-            <span className="text-xs text-gray-400 whitespace-nowrap">OR REGISTER WITH</span>
+            <span className="text-xs text-gray-400 whitespace-nowrap">
+              OR REGISTER WITH
+            </span>
             <hr className="flex-1 border-t border-gray-200 dark:border-gray-800" />
           </div>
 
@@ -154,7 +229,10 @@ const RegisterClient = () => {
           {/* Footer link */}
           <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-6">
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-cyan-500 hover:underline">
+            <Link
+              href="/login"
+              className="font-semibold text-[#4f39f6] hover:underline"
+            >
               Log in
             </Link>
           </p>
