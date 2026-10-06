@@ -8,7 +8,6 @@ const Loading = () => {
     <div className="min-h-[80vh] w-full flex flex-col items-center justify-center px-4 bg-linear-to-br from-purple-50/50 via-white to-indigo-50/50 dark:from-gray-950 dark:via-gray-900 dark:to-indigo-950/30 transition-colors duration-500">
       
       <div className="relative flex items-center justify-center">
-        {/* Outer soft pulse ring */}
         <motion.div
           className="absolute w-28 h-28 rounded-full bg-linear-to-r from-[#4f39f6]/20 to-[#9514fa]/20"
           animate={{
@@ -21,8 +20,6 @@ const Loading = () => {
             ease: "easeInOut",
           }}
         />
-
-        {/* Middle rotating ring */}
         <motion.div
           className="absolute w-20 h-20 rounded-full border-[3px] border-transparent border-t-[#4f39f6] border-r-[#9514fa]"
           animate={{ rotate: 360 }}

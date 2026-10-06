@@ -15,13 +15,9 @@ export default function NotFound() {
         <h1 className="text-4xl sm:text-5xl font-black text-gray-800 dark:text-white mb-4 tracking-tight">
           Page Not Found
         </h1>
-
-        {/* Description */}
         <p className="text-gray-500 dark:text-gray-300 text-base max-w-md mx-auto mb-10 leading-relaxed">
           Oops! The page you are looking for doesn&apos;t exist. It might have been moved, deleted, or the tutor session link is invalid.
         </p>
-
-        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
             href="/"
