@@ -45,16 +45,16 @@ const BookSessionForm = ({ tutor }) => {
       setLoading(true);
 
       // 1. Stripe Checkout Session create
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tutorId: _id,
-          tutorName,
-          price: hourlyFee, // ← hourlyFee use
-          tutorEmail: tutorEmail || "",
-        }),
-      });
+  const res = await fetch("/api/checkout_sessions", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    tutorId: _id,
+    tutorName,
+    price: hourlyFee,
+    tutorEmail: tutorEmail || "",
+  }),
+});
 
       const data = await res.json();
 
@@ -104,47 +104,72 @@ const BookSessionForm = ({ tutor }) => {
 
               <Modal.Body className="p-6 overflow-y-auto">
                 <Surface variant="default">
-                  <form className="flex flex-col gap-4" onSubmit={onSubmit}>
-                    <TextField className="w-full" name="name" type="text" variant="secondary">
-                      <Label>Name</Label>
-                      <Input placeholder="Enter your name" defaultValue={user?.name || ""} />
-                    </TextField>
+              <form className="flex flex-col gap-4" onSubmit={onSubmit}>
+  {/* Name */}
+  <TextField
+    className="w-full"
+    name="name"
+    type="text"
+    variant="secondary"
+    defaultValue={user?.name || ""}
+  >
+    <Label>Name</Label>
+    <Input placeholder="Enter your name" />
+  </TextField>
 
-                    <TextField className="w-full" name="email" type="email" variant="secondary">
-                      <Label>Email</Label>
-                      <Input placeholder="Enter your email" defaultValue={user?.email || ""} />
-                    </TextField>
+  {/* Email */}
+  <TextField
+    className="w-full"
+    name="email"
+    type="email"
+    variant="secondary"
+    defaultValue={user?.email || ""}
+  >
+    <Label>Email</Label>
+    <Input placeholder="Enter your email" />
+  </TextField>
 
-                    <TextField className="w-full" name="tutorName" type="text" variant="secondary" defaultValue={tutorName || ""}>
-                      <Label>Tutor Name</Label>
-                      <Input readOnly />
-                    </TextField>
+  {/* Tutor Name - read only */}
+  <TextField
+    className="w-full"
+    name="tutorName"
+    type="text"
+    variant="secondary"
+    defaultValue={tutorName || ""}
+    isReadOnly
+  >
+    <Label>Tutor Name</Label>
+    <Input placeholder="Tutor name" />
+  </TextField>
 
-                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3 text-sm">
-                      <p>
-                        <strong>Amount:</strong> ${hourlyFee}
-                      </p>
-                      <p className="text-gray-500 mt-1">You will be redirected to Stripe for secure payment.</p>
-                    </div>
+  {/* Amount info */}
+  <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3 text-sm">
+    <p>
+      <strong>Amount:</strong> ${hourlyFee}
+    </p>
+    <p className="text-gray-500 mt-1">
+      You will be redirected to Stripe for secure payment.
+    </p>
+  </div>
 
-                    <Modal.Footer>
-                      <Button
-                        type="button"
-                        onClick={() => setIsOpen(false)}
-                        variant="secondary"
-                        className="text-purple-500"
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        type="submit"
-                        disabled={loading}
-                        className="bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white font-medium"
-                      >
-                        {loading ? "Processing..." : `Pay $${hourlyFee}`}
-                      </Button>
-                    </Modal.Footer>
-                  </form>
+  <Modal.Footer>
+    <Button
+      type="button"
+      onClick={() => setIsOpen(false)}
+      variant="secondary"
+      className="text-purple-500"
+    >
+      Cancel
+    </Button>
+    <Button
+      type="submit"
+      disabled={loading}
+      className="bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white font-medium"
+    >
+      {loading ? "Processing..." : `Pay $${hourlyFee}`}
+    </Button>
+  </Modal.Footer>
+</form>
                 </Surface>
               </Modal.Body>
             </Modal.Dialog>
