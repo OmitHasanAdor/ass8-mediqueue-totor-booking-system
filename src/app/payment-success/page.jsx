@@ -12,73 +12,77 @@ export default function PaymentSuccessPage() {
   const [status, setStatus] = useState("loading"); // loading | success | error
   const { data } = authClient.useSession();
   const user = data?.user;
+  
+useEffect(() => {
+  if (!sessionId || !user) return;
 
-  useEffect(() => {
-    if (!sessionId || !user) return;
+  // Already process hole skip
+  const alreadyDone = localStorage.getItem(`booking_${sessionId}`);
+  if (alreadyDone) {
+    setStatus("success");
+    return;
+  }
 
-    const confirmBooking = async () => {
-      try {
-        // 1. Stripe session verify
-        const verifyRes = await fetch("/api/verify-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId }),
-        });
+  const confirmBooking = async () => {
+    try {
+      const verifyRes = await fetch("/api/verify-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId }),
+      });
 
-        const verifyData = await verifyRes.json();
+      const verifyData = await verifyRes.json();
 
-        if (!verifyRes.ok || !verifyData.success) {
-          setStatus("error");
-          toast.error(verifyData.error || "Payment verification failed");
-          return;
-        }
-
-        const { metadata, amount } = verifyData;
-
-        // 2. Booking create
-        const { data: tokenData } = await authClient.token();
-
-        const bookingData = {
-          userId: user.id,
-          userImage: user.image,
-          userName: user.name,
-          userEmail: user.email,
-          tutorId: metadata.tutorId,
-          tutorName: metadata.tutorName,
-          hourlyFee: amount,
-          status: "paid",
-          paymentSessionId: sessionId,
-        };
-
-        const bookRes = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              authorization: `Bearer ${tokenData?.token}`,
-            },
-            body: JSON.stringify(bookingData),
-          }
-        );
-
-        if (bookRes.ok) {
-          setStatus("success");
-          toast.success("Session booked successfully!");
-        } else {
-          setStatus("error");
-          toast.error("Payment ok, but booking failed. Contact support.");
-        }
-      } catch (error) {
-        console.error(error);
+      if (!verifyRes.ok || !verifyData.success) {
         setStatus("error");
-        toast.error("Something went wrong");
+        toast.error(verifyData.error || "Payment verification failed");
+        return;
       }
-    };
 
-    confirmBooking();
-  }, [sessionId, user]);
+      const { metadata, amount } = verifyData;
+      const { data: tokenData } = await authClient.token();
 
+      const bookingData = {
+        userId: user.id,
+        userImage: user.image,
+        userName: user.name,
+        userEmail: user.email,
+        tutorId: metadata.tutorId,
+        tutorName: metadata.tutorName,
+        hourlyFee: amount,
+        status: "paid",
+        paymentSessionId: sessionId,
+      };
+
+      const bookRes = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${tokenData?.token}`,
+          },
+          body: JSON.stringify(bookingData),
+        }
+      );
+
+      if (bookRes.ok) {
+        localStorage.setItem(`booking_${sessionId}`, "true"); // mark done
+        setStatus("success");
+        toast.success("Session booked successfully!");
+      } else {
+        setStatus("error");
+        toast.error("Payment ok, but booking failed.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+      toast.error("Something went wrong");
+    }
+  };
+
+  confirmBooking();
+}, [sessionId, user]);
   if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center">
