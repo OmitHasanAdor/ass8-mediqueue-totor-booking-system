@@ -21,18 +21,18 @@ import {
 import { FaBrain } from "react-icons/fa";
 
 const menuItems = {
-  student: [
-    { name: "Dashboard", href: "/dashboard/student", icon: FiHome },
-    { name: "My Bookings", href: "/my-booked-sessions", icon: FiCalendar },
-    { name: "Find Tutors", href: "/tutors", icon: FiSearch },
-    { name: "Profile", href: "/profile", icon: FiUser },
-  ],
-  tutor: [
-    { name: "Dashboard", href: "/dashboard/tutor", icon: FiHome },
-    { name: "My Tutors", href: "/my-tutors", icon: FiBookOpen },
-    { name: "Add Session", href: "/add-tutor", icon: FiPlusCircle },
-    { name: "Profile", href: "/profile", icon: FiUser },
-  ],
+ tutor: [
+  { name: "Dashboard", href: "/dashboard/tutor", icon: FiHome },
+  { name: "My Tutors", href: "/dashboard/tutor/my-tutors", icon: FiBookOpen },
+  { name: "Add Session", href: "/dashboard/tutor/add-tutor", icon: FiPlusCircle },
+  { name: "Profile", href: "/profile", icon: FiUser },
+],
+student: [
+  { name: "Dashboard", href: "/dashboard/student", icon: FiHome },
+  { name: "My Bookings", href: "/dashboard/student/bookings", icon: FiCalendar },
+  { name: "Find Tutors", href: "/tutors", icon: FiSearch },
+  { name: "Profile", href: "/profile", icon: FiUser },
+],
   admin: [
     { name: "Dashboard", href: "/dashboard/admin", icon: FiHome },
     { name: "All Users", href: "/dashboard/admin/users", icon: FiUsers },

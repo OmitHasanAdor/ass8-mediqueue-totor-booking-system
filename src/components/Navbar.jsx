@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
@@ -9,8 +9,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const router = useRouter();
-  
-  // Safe way
+
   const session = authClient.useSession();
   const data = session?.data;
   const user = data?.user;
@@ -31,51 +30,94 @@ const Navbar = () => {
     }
   };
 
+  const dashboardHref =
+    user?.role === "admin"
+      ? "/dashboard/admin"
+      : user?.role === "tutor"
+      ? "/dashboard/tutor"
+      : "/dashboard/student";
+
   const navLinks = (
     <>
       <li>
-        <Link href="/" className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+        <Link
+          href="/"
+          className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+        >
           Home
         </Link>
       </li>
       <li>
-        <Link href="/tutors" className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+        <Link
+          href="/tutors"
+          className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+        >
           Tutors
         </Link>
       </li>
 
       {user && (
         <>
+          {/* Tutor only */}
           {user.role === "tutor" && (
             <>
               <li>
-                <Link href="/add-tutor" className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                <Link
+                  href="/dashboard/tutor/add-tutor"
+                  className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                >
                   Add Tutor
                 </Link>
               </li>
               <li>
-                <Link href="/my-tutors" className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                <Link
+                  href="/dashboard/tutor/my-tutors"
+                  className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                >
                   My Tutors
                 </Link>
               </li>
             </>
           )}
 
-          <li>
-            <Link href="/my-booked-sessions" className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-              My Booked Sessions
-            </Link>
-          </li>
+          {/* Student only */}
+          {user.role === "student" && (
+            <li>
+              <Link
+                href="/dashboard/student/bookings"
+                className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+              >
+                My Booked Sessions
+              </Link>
+            </li>
+          )}
 
+          {/* Admin only */}
+          {user.role === "admin" && (
+            <>
+              <li>
+                <Link
+                  href="/dashboard/admin/users"
+                  className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                >
+                  Users
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dashboard/admin/sessions"
+                  className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                >
+                  Sessions
+                </Link>
+              </li>
+            </>
+          )}
+
+          {/* All logged-in users */}
           <li>
             <Link
-              href={
-                user.role === "admin"
-                  ? "/dashboard/admin"
-                  : user.role === "tutor"
-                  ? "/dashboard/tutor"
-                  : "/dashboard/student"
-              }
+              href={dashboardHref}
               className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
             >
               Dashboard
@@ -92,8 +134,19 @@ const Navbar = () => {
       <div className="navbar-start gap-1">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
             </svg>
           </div>
           <ul
@@ -123,11 +176,18 @@ const Navbar = () => {
           <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse" />
         ) : user ? (
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
               <div className="w-10 rounded-full ring-2 ring-purple-500/40 ring-offset-2 ring-offset-base-100 dark:ring-offset-black overflow-hidden">
                 <Image
                   alt={user?.name || "User"}
-                  src={user?.image || "https://cdn-icons-png.flaticon.com/512/3675/3675805.png"}
+                  src={
+                    user?.image ||
+                    "https://cdn-icons-png.flaticon.com/512/3675/3675805.png"
+                  }
                   width={40}
                   height={40}
                   className="object-cover w-full h-full"
@@ -144,7 +204,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <button onClick={handleLogout} className="font-semibold rounded-lg text-red-500">
+                <button
+                  onClick={handleLogout}
+                  className="font-semibold rounded-lg text-red-500"
+                >
                   Logout
                 </button>
               </li>
