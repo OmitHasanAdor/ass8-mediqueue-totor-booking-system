@@ -21,18 +21,18 @@ import {
 import { FaBrain } from "react-icons/fa";
 
 const menuItems = {
- tutor: [
-  { name: "Dashboard", href: "/dashboard/tutor", icon: FiHome },
-  { name: "My Tutors", href: "/dashboard/tutor/my-tutors", icon: FiBookOpen },
-  { name: "Add Session", href: "/dashboard/tutor/add-tutor", icon: FiPlusCircle },
-  { name: "Profile", href: "/profile", icon: FiUser },
-],
-student: [
-  { name: "Dashboard", href: "/dashboard/student", icon: FiHome },
-  { name: "My Bookings", href: "/dashboard/student/bookings", icon: FiCalendar },
-  { name: "Find Tutors", href: "/tutors", icon: FiSearch },
-  { name: "Profile", href: "/profile", icon: FiUser },
-],
+  tutor: [
+    { name: "Dashboard", href: "/dashboard/tutor", icon: FiHome },
+    { name: "My Tutors", href: "/dashboard/tutor/my-tutors", icon: FiBookOpen },
+    { name: "Add Session", href: "/dashboard/tutor/add-tutor", icon: FiPlusCircle },
+    { name: "Profile", href: "/profile", icon: FiUser },
+  ],
+  student: [
+    { name: "Dashboard", href: "/dashboard/student", icon: FiHome },
+    { name: "My Bookings", href: "/dashboard/student/bookings", icon: FiCalendar },
+    { name: "Find Tutors", href: "/tutors", icon: FiSearch },
+    { name: "Profile", href: "/profile", icon: FiUser },
+  ],
   admin: [
     { name: "Dashboard", href: "/dashboard/admin", icon: FiHome },
     { name: "All Users", href: "/dashboard/admin/users", icon: FiUsers },
@@ -50,25 +50,25 @@ const Sidebar = ({ role = "student", userName = "User", userEmail = "" }) => {
   const items = menuItems[role] || menuItems.student;
   const router = useRouter();
 
-const handleLogout = async () => {
-  try {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          toast.success("Logged out successfully");
-          router.push("/login");
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Logged out successfully");
+            router.push("/login");
+          },
         },
-      },
-    });
-  } catch (error) {
-    console.error("Logout error:", error);
-    toast.error("Failed to logout");
-  }
-};
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("Failed to logout");
+    }
+  };
 
   return (
     <aside className="w-full md:w-64 min-h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col transition-colors duration-300">
-      
+
       {/* Logo */}
       <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100 dark:border-gray-800">
         <div className="w-10 h-10 rounded-xl bg-linear-to-br from-[#4f39f6] to-[#9514fa] flex items-center justify-center shadow-md">
@@ -93,7 +93,10 @@ const handleLogout = async () => {
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         {items.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+          const isActive =
+            item.href === `/dashboard/${role}`
+              ? pathname === item.href // dashboard → exact match only
+              : pathname === item.href || pathname.startsWith(item.href + "/");
           const Icon = item.icon;
 
           return (
@@ -101,11 +104,10 @@ const handleLogout = async () => {
               <motion.div
                 whileHover={{ x: 4 }}
                 whileTap={{ scale: 0.98 }}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  isActive
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
                     ? "bg-linear-to-r from-[#4f39f6] to-[#9514fa] text-white shadow-md"
                     : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                }`}
+                  }`}
               >
                 <Icon className="w-5 h-5" />
                 <span>{item.name}</span>
@@ -115,16 +117,16 @@ const handleLogout = async () => {
         })}
       </nav>
 
-   {/* Logout */}
-<div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800">
-  <button
-    onClick={handleLogout}
-    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-  >
-    <FiLogOut className="w-5 h-5" />
-    <span>Logout</span>
-  </button>
-</div>
+      {/* Logout */}
+      <div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+        >
+          <FiLogOut className="w-5 h-5" />
+          <span>Logout</span>
+        </button>
+      </div>
     </aside>
   );
 };
