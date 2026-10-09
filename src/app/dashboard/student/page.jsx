@@ -49,29 +49,29 @@ const StudentDashboard = () => {
   const paid = bookings.filter((b) => b.status === "paid").length;
   const cancelled = bookings.filter((b) => b.status === "cancelled").length;
 
-  const cards = [
-    {
-      title: "My Bookings",
-      description: "View and manage your sessions",
-      href: "/my-booked-sessions",
-      icon: FiCalendar,
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      title: "Find Tutors",
-      description: "Browse and book new sessions",
-      href: "/tutors",
-      icon: FiSearch,
-      color: "from-purple-500 to-indigo-500",
-    },
-    {
-      title: "Profile",
-      description: "Update your information",
-      href: "/profile",
-      icon: FiUser,
-      color: "from-pink-500 to-rose-500",
-    },
-  ];
+const cards = [
+  {
+    title: "My Bookings",
+    description: "View and manage your sessions",
+    href: "/dashboard/student/bookings",
+    icon: FiCalendar,
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "Find Tutors",
+    description: "Browse and book new sessions",
+    href: "/tutors",
+    icon: FiSearch,
+    color: "from-purple-500 to-indigo-500",
+  },
+  {
+    title: "Profile",
+    description: "Update your information",
+    href: "/profile",
+    icon: FiUser,
+    color: "from-pink-500 to-rose-500",
+  },
+];
 
   return (
     <div className="p-6 md:p-8">

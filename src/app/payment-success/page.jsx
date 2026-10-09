@@ -110,7 +110,7 @@ useEffect(() => {
       <p className="text-gray-600 dark:text-gray-300">
         Your tutor session has been booked.
       </p>
-      <Link href="/my-booked-sessions" className="btn btn-primary">
+      <Link href="/dashboard/student/bookings" className="btn btn-primary">
         View My Bookings
       </Link>
     </div>

@@ -51,8 +51,11 @@ const Footer = () => {
 
               <li>
                 <Link
-                  href="/my-booked-sessions"
-                  className="hover:text-blue-600 transition">My Bookings</Link>
+                  href="/dashboard/student/bookings"
+                  className="hover:text-blue-600 transition"
+                >
+                  My Bookings
+                </Link>
               </li>
 
               <li>

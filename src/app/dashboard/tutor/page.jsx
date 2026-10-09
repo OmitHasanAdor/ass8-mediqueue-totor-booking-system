@@ -48,29 +48,29 @@ const TutorDashboard = () => {
   const totalSessions = tutors.length;
   const totalSlots = tutors.reduce((sum, t) => sum + (t.totalSlot || 0), 0);
 
-  const cards = [
-    {
-      title: "My Sessions",
-      description: "Manage your tutoring sessions",
-      href: "/my-tutors",
-      icon: FiBookOpen,
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      title: "Add Session",
-      description: "Create a new tutoring session",
-      href: "/add-tutor",
-      icon: FiPlusCircle,
-      color: "from-purple-500 to-indigo-500",
-    },
-    {
-      title: "Profile",
-      description: "Update your information",
-      href: "/profile",
-      icon: FiUser,
-      color: "from-pink-500 to-rose-500",
-    },
-  ];
+const cards = [
+  {
+    title: "My Sessions",
+    description: "Manage your tutoring sessions",
+    href: "/dashboard/tutor/my-tutors",
+    icon: FiBookOpen,
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "Add Session",
+    description: "Create a new tutoring session",
+    href: "/dashboard/tutor/add-tutor",
+    icon: FiPlusCircle,
+    color: "from-purple-500 to-indigo-500",
+  },
+  {
+    title: "Profile",
+    description: "Update your information",
+    href: "/profile",
+    icon: FiUser,
+    color: "from-pink-500 to-rose-500",
+  },
+];
 
   return (
     <div className="p-6 md:p-8">
